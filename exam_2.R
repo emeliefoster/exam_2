@@ -45,4 +45,11 @@ b <- a%>%
   mutate(date = as.character(as.Date(modayyr, "%Y/%m/%d"),"%m/%d/%Y"))
 View(b)
 write.csv(x=b, file="Nest_Sites_corrected.csv", row.names = F)
->>>>>>> 95dac417b0ca504027593bf7e3c038078450b954
+c <- a%>%
+  mutate(date = as.character(as.Date(modayyr, "%Y/%m/%d"),"%Y"))
+
+c %>%
+  group_by(date) %>%
+  summarise(max_count=
+              sum(youngage, na.rm=TRUE)) %>%
+  filter(max_count==max(max_count))
