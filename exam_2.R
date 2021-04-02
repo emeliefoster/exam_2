@@ -11,3 +11,22 @@ b <- a%>%
   mutate(date = as.character(as.Date(modayyr, "%Y/%m/%d"),"%m/%d/%Y"))
 View(b)
 write.csv(x=b, file="Nest_Sites_corrected.csv", row.names = F)
+
+min(b$date)
+max(b$date)
+c <- a%>%
+  mutate(date = as.character(as.Date(modayyr, "%Y/%m/%d"),"%Y"))
+View (c)
+min(c$date)
+max(c$date)
+write.csv(x=c, file="Nest_Sites_corrected3.csv", row.names=F)
+max(a$youngage, na.rm = TRUE)
+#calculating the year with the highest # of eaglets
+library(dplyr)
+d=c %>%
+  group_by(date) %>%
+  summarise(max_count=
+            sum(youngage, na.rm=TRUE)) %>%
+  filter(max_count==max(max_count))
+d
+
